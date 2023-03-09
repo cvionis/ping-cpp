@@ -71,7 +71,8 @@ int main(int argc, char** argv)
         if (replyCount)
         {
 			PICMP_ECHO_REPLY pEchoReply{ (PICMP_ECHO_REPLY)replyBuffer };
-            std::cout << "Reply from " << argv[1] << ": bytes=" << pEchoReply->DataSize << " time=" << pEchoReply->RoundTripTime << "ms TTL=" << (int)pEchoReply->Options.Ttl << std::endl;
+            std::cout << "Reply from " << argv[1] << ": bytes=" << pEchoReply->DataSize << " time=" << pEchoReply->RoundTripTime 
+                << "ms TTL=" << (int)pEchoReply->Options.Ttl << std::endl;
 
             ++packetsReceived;
             rttList.push_back(pEchoReply->RoundTripTime);
@@ -88,7 +89,8 @@ int main(int argc, char** argv)
     int percentLost{ (packetsLost ? static_cast<int>(packetsSent / packetsLost) * 100 : 0 )};
 
     std::cout << "\nPing statistics for " << argv[1] << ':' << std::endl;
-    std::cout << "\tPackets: Sent = " << packetsSent << ", Received = " << packetsReceived << ", Lost = " << packetsLost << " (" << percentLost << "% loss)," << std::endl;
+    std::cout << "\tPackets: Sent = " << packetsSent << ", Received = " << packetsReceived << ", Lost = " << packetsLost 
+        << " (" << percentLost << "% loss)," << std::endl;
 
     int rttMin{ *std::min_element(rttList.begin(), rttList.end()) };
     int rttMax{ *std::max_element(rttList.begin(), rttList.end()) };
